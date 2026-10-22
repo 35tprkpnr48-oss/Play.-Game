@@ -13,6 +13,8 @@ app.set('trust proxy', true); // reverse proxy (nginx, Render, Railway vs.) arka
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
+const DATA_DIR = path.dirname(DATA_FILE);
+if (!fs.existsSync(DATA_DIR)) fs.mkdirSync(DATA_DIR, { recursive: true });
 if (!fs.existsSync(DATA_FILE)) fs.writeFileSync(DATA_FILE, '[]');
 
 function readSubmissions() {
